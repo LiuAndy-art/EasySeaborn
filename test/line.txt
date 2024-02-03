@@ -1,0 +1,194 @@
+===============================================================================0
+导入模块
+>>> import sys
+>>> sys.path.append("D:\\document\\statistics\\TidyStatsProject")
+>>> import matplotlib.pyplot as plt
+>>> from TidySeabornUpdate import GetSeabornData, line
+>>> import numpy as np
+>>> flights = GetSeabornData("flights")
+>>> fmri = GetSeabornData("fmri")
+===============================================================================1
+测试线图参数
+===============================================================================2
+单个线图
+>>> ax = line(flights.query("month == 'May'"), xvarname="year", yvarname="passengers", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+===============================================================================3
+多个线图
+>>> ax = line(flights.pivot(index="year", columns="month", values="passengers"), block=False)
+>>> plt.pause(2)
+>>> plt.close()
+===============================================================================4
+x重复值下的单个线图
+>>> ax = line(flights, xvarname="year", yvarname="passengers", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+===============================================================================5
+分组线图
+>>> ax = line(flights, xvarname="year", yvarname="passengers", groupby="month", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+===============================================================================6
+线条样式分组线图
+>>> ax = line(flights, xvarname="year", yvarname="passengers", groupby="month", lineparamsdict={"stylegroup": "month"}, block=False)
+>>> plt.pause(2)
+>>> plt.close()
+===============================================================================7
+线条宽度分组线图
+>>> ax = line(flights, xvarname="year", yvarname="passengers", groupby="month", lineparamsdict={"stylegroup": "month", "sizegroup": "month"}, block=False)
+>>> plt.pause(2)
+>>> plt.close()
+===============================================================================8
+水平线图
+>>> ax = line(flights, xvarname="passengers", yvarname="year", groupby="month", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+===============================================================================9
+分组线图x多个重复值
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="event", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+===============================================================================10
+线条样式分组
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, block=False)
+>>> plt.pause(2)
+>>> plt.close()
+===============================================================================11
+添加散点线条样式分组
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event", "markers": 1}, block=False)
+>>> plt.pause(2)
+>>> plt.close()
+===============================================================================12
+误差样式线条样式分组
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event", "markers": 1, "err_style": "bars"}, block=False)
+>>> plt.pause(2)
+>>> plt.close()
+===============================================================================13
+不按照顺序绘图
+>>> x, y = np.random.normal(size=(2, 5000)).cumsum(axis=1)
+>>> ax = line(plottype= xvarname=x, yvarname=y, lineparamsdict={"issort": 1}, block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(plottype= xvarname=x, yvarname=y, lineparamsdict={"issort": 0}, block=False)
+>>> plt.pause(2)
+>>> plt.close()
+===============================================================================14
+测试一般绘图的标签参数
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, block=False)
+>>> plt.pause(2)
+>>> plt.close()
+===============================================================================15
+测试一般绘图的字体参数
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+===============================================================================16
+测试一般绘图的文件保存参数
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", savefilename="./image/线图.pdf", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+===============================================================================17
+测试一般绘图参数的绘图风格参数
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", snsstyle="darkgrid", removeleftspine=0, removerightspine=1, removetopspine=1, removebottomspine=0, offset=None, trim=0, contextstyle="notebook", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", snsstyle="whitegrid", removeleftspine=0, removerightspine=1, removetopspine=1, removebottomspine=0, offset=None, trim=0, contextstyle="paper", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", snsstyle="white", removeleftspine=0, removerightspine=1, removetopspine=1, removebottomspine=0, offset=None, trim=0, contextstyle="talk", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", snsstyle="dark", removeleftspine=0, removerightspine=1, removetopspine=1, removebottomspine=0, offset=None, trim=0, contextstyle="poster", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", snsstyle="ticks", removeleftspine=0, removerightspine=1, removetopspine=1, removebottomspine=0, offset=None, trim=1, contextstyle="notebook", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+===============================================================================18
+测试一般绘图参数的matplotlib绘图风格参数
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="Solarize_Light2", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="_classic_test_patch", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="_mpl-gallery", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="_mpl-gallery-nogrid", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="bmh", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="classic", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="dark_background", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="fast", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="fivethirtyeight", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="ggplot", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="grayscale", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="seaborn-v0_8", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="seaborn-v0_8-bright", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="seaborn-v0_8-colorblind", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="seaborn-v0_8-dark", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="seaborn-v0_8-dark-palette", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="seaborn-v0_8-darkgrid", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="seaborn-v0_8-deep", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="seaborn-v0_8-muted", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="seaborn-v0_8-notebook", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="seaborn-v0_8-paper", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="seaborn-v0_8-pastel", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="seaborn-v0_8-poster", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="seaborn-v0_8-talk", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="seaborn-v0_8-ticks", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="seaborn-v0_8-white", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="seaborn-v0_8-whitegrid", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+>>> ax = line(fmri, xvarname="timepoint", yvarname="signal", groupby="region", lineparamsdict={"stylegroup": "event"}, xlabel="时间点", ylabel="信号值", title="时间序列线图", xlabelsize=10, ylabelsize=16, titlesize=14, xticklabelsize=9, yticklabelsize=15, xticklabelrotation=30, yticklabelrotation=45, fontfamily="幼圆", matplotlibstyle="tableau-colorblind10", block=False)
+>>> plt.pause(2)
+>>> plt.close()
+===============================================================================19
