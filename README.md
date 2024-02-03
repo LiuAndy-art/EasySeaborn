@@ -3,4 +3,4 @@
 
 ## bar柱状图
 
-[bar函数示例]()
+[bar函数示例](./example/bar.md)
