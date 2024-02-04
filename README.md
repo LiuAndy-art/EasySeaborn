@@ -4,3 +4,7 @@
 ## bar柱状图
 
 [bar函数示例](./example/bar.md)
+
+## box箱线图
+
+[box函数示例](./example/box.md)

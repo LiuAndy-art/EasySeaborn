@@ -143,7 +143,6 @@ def bar(
     >>> import numpy as np
     >>> penguins = GetSeabornData("penguins")
     >>> flights = GetSeabornData("flights")
-    >>> print(penguins)
     ===============================================================================1
     测试df参数(绘制整个dataframe中数值变量的估计量和误差值)
     >>> ax = bar(penguins, savefilename="./image/bar1.png", block=False)
