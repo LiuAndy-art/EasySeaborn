@@ -8,3 +8,7 @@
 ## box箱线图
 
 [box函数示例](./example/box.md)
+
+## count计数图
+
+[count函数示例](./example/count.md)
