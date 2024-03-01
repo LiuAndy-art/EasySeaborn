@@ -7,7 +7,6 @@
 >>> import numpy as np
 >>> titanic = GetSeabornData("titanic")
 >>> flights = GetSeabornData("flights")
->>> print(flights)
 ===============================================================================1
 测试df参数(绘制整个dataframe中数值变量的估计量和误差值)
 >>> ax = box(titanic, savefilename="./image/box1.png",block=False)

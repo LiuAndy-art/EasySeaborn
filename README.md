@@ -12,3 +12,7 @@
 ## count计数图
 
 [count函数示例](./example/count.md)
+
+## ecdf经验分布函数图
+
+[ecdf函数示例](./example/ecdf.md)

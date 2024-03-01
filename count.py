@@ -118,7 +118,6 @@ def count(
     >>> from SoEasyData import GetSeabornData
     >>> import numpy as np
     >>> titanic = GetSeabornData("titanic")
-    >>> print(titanic)
     ===============================================================================1
     测试df参数(绘制整个dataframe中字符变量的计数柱状图)
     >>> ax = count(titanic, savefilename="./image/count1.png", block=False)
